@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference move;
     public InputActionReference jump;
     public InputActionReference close;
-    public float jumpStrength = 1500f;
+    public float jumpStrength = 15f;
 
 
 
@@ -35,10 +35,11 @@ public class PlayerMovement : MonoBehaviour
     {
         //left to right movement, reads the input and passes it into move direction which determines left or right, and multiplies by move speed. 
         moveDirection = move.action.ReadValue<Vector2>();
-        body.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y*moveSpeed);
+        body.linearVelocityX = moveDirection.x * moveSpeed;
 
         //jump
         jump.action.started += Jump;
+        body.freezeRotation = true;
 
         //close game
         close.action.started += Close;
@@ -47,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     void playerJumping()
     {
         Debug.Log("jump");
-        body.linearVelocityY = jumpStrength;
+        body.linearVelocity = Vector2.up * jumpStrength;
     }
 
     //currently tests, runs when the buttons are pressed. 
