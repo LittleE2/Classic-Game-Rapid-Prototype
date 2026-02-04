@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,8 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference move;
     public InputActionReference jump;
     public InputActionReference close;
-    public float jumpStrength = 5f;
-    
+    public float jumpStrength = 1500f;
+
 
 
     void Start()
@@ -24,7 +25,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement();
+        
     }
+
 
 
     //handles player movement
@@ -34,9 +37,6 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = move.action.ReadValue<Vector2>();
         body.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y*moveSpeed);
 
-
-
-
         //jump
         jump.action.started += Jump;
 
@@ -44,14 +44,25 @@ public class PlayerMovement : MonoBehaviour
         close.action.started += Close;
 
     }
-
-    //currently tests, runs when the buttons are pressed. 
-    private void Jump(InputAction.CallbackContext obj)
+    void playerJumping()
     {
         Debug.Log("jump");
+        body.linearVelocityY = jumpStrength;
     }
-    private void Close(InputAction.CallbackContext obj)
+
+    //currently tests, runs when the buttons are pressed. 
+    private void Jump(InputAction.CallbackContext context)
+    {
+
+        playerJumping();
+            
+    }
+
+    private void Close(InputAction.CallbackContext context)
     {
         Debug.Log("close game");
     }
+
+
+
 }
