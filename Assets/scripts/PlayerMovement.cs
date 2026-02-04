@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,8 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference move;
     public InputActionReference jump;
     public InputActionReference close;
-    public float jumpStrength = 5f;
-    
+    public float jumpStrength = 15f;
+
 
 
     void Start()
@@ -24,7 +25,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement();
+        
     }
+
 
 
     //handles player movement
@@ -32,26 +35,35 @@ public class PlayerMovement : MonoBehaviour
     {
         //left to right movement, reads the input and passes it into move direction which determines left or right, and multiplies by move speed. 
         moveDirection = move.action.ReadValue<Vector2>();
-        body.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y*moveSpeed);
-
-
-
+        body.linearVelocityX = moveDirection.x * moveSpeed;
 
         //jump
         jump.action.started += Jump;
+        body.freezeRotation = true;
 
         //close game
         close.action.started += Close;
 
     }
-
-    //currently tests, runs when the buttons are pressed. 
-    private void Jump(InputAction.CallbackContext obj)
+    void playerJumping()
     {
         Debug.Log("jump");
+        body.linearVelocity = Vector2.up * jumpStrength;
     }
-    private void Close(InputAction.CallbackContext obj)
+
+    //currently tests, runs when the buttons are pressed. 
+    private void Jump(InputAction.CallbackContext context)
+    {
+
+        playerJumping();
+            
+    }
+
+    private void Close(InputAction.CallbackContext context)
     {
         Debug.Log("close game");
     }
+
+
+
 }

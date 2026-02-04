@@ -275,7 +275,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 15
+  m_GravityScale: 7
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -304,7 +304,7 @@ MonoBehaviour:
   move: {fileID: 3688370849028922600, guid: b3b0c27e81c574a44820041544dc3991, type: 3}
   jump: {fileID: 5191359553856968962, guid: b3b0c27e81c574a44820041544dc3991, type: 3}
   close: {fileID: 8731075755438202132, guid: b3b0c27e81c574a44820041544dc3991, type: 3}
-  jumpStrength: 5
+  jumpStrength: 30
 --- !u!114 &190961684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 349640932}
   m_Layer: 0
   m_Name: floor
-  m_TagString: Untagged
+  m_TagString: solidGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -707,7 +707,7 @@ GameObject:
   - component: {fileID: 1131559794}
   m_Layer: 0
   m_Name: platform
-  m_TagString: Untagged
+  m_TagString: solidGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
